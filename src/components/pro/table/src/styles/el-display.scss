@@ -1,0 +1,16 @@
+.#{$el-namespace}-cell-copy-icon {
+  margin-inline-start: 4px;
+  vertical-align: sub;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition: color cssVar(transition-duration-fast);
+
+  &:hover {
+    color: cssVarEl(color-primary);
+  }
+}
+
+.#{$teek-namespace}-cell-point-tag {
+  vertical-align: 1px;
+}

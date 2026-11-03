@@ -1,0 +1,22 @@
+@use "@styles/mixins/bem" as *;
+@use "@styles/mixins/namespace" as *;
+@use "@styles/mixins/function" as *;
+
+@include b(pro-descriptions) {
+  @include el-joins(descriptions) {
+    // label 背景色
+    --#{$el-namespace}-descriptions-item-bordered-label-background: var(--#{$teek-namespace}-gray-color-100);
+  }
+
+  @include e(label) {
+    min-width: 80px;
+
+    &.is-required {
+      &::before {
+        margin-right: 4px;
+        color: cssVarEl(color-danger);
+        content: "*";
+      }
+    }
+  }
+}
