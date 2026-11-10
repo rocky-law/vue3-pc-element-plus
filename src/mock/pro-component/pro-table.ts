@@ -33,7 +33,7 @@ export const tableData = [
     user: { detail: { age: 10 } },
     age: 10,
     idCard: "026454951166840353",
-    email: "t.xxoblmbhvd@ttbmbazuj.ee",
+    email: "tcccccccc.xxoblmbhvd@ttbmbazuj.ee",
     address: "新疆维吾尔自治区 阿克苏地区",
     createTime: "1995-03-29 01:41:47",
     status: 1,

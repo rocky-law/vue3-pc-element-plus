@@ -17,7 +17,7 @@ export default {
     [SERVER_ERROR_NAME]: "404",
     [GATEWAY_TIMEOUT_NAME]: "500",
     [HOME_NAME]: "首页",
-    echarts: "有向依赖图",
+    echarts: "会员充值",
     ErrorLog: "错误日志",
     Profile: "我的主页",
     Message: "我的消息",

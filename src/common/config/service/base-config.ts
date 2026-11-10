@@ -22,7 +22,7 @@ export const defaultServiceConfig: ServiceConfig = {
     name: "区块链数据解析",
     avatar: "/avatar.png",
     titleMode: TitleModeEnum.ProjectPage,
-    layoutMode: LayoutModeEnum.Horizontal,
+    layoutMode: LayoutModeEnum.Vertical,
     maximize: false,
     watermark: false,
     moreRouteChildrenHideInMenuThenOnlyOne: false,
@@ -165,7 +165,7 @@ export const defaultServiceConfig: ServiceConfig = {
     rightClickMenuCollapseToClose: true,
   },
   tabNav: {
-    enabled: true,
+    enabled: false,
     elementMode: TabNavElementModeEnum.Simple,
     showIcon: true,
     showDot: true,
@@ -181,7 +181,7 @@ export const defaultServiceConfig: ServiceConfig = {
     maxCount: 0,
   },
   breadcrumb: {
-    enabled: false,
+    enabled: true,
     showIcon: true,
     hideOnlyOne: false,
     showHome: true,
@@ -198,7 +198,7 @@ export const defaultServiceConfig: ServiceConfig = {
   },
   widget: {
     menuCollapse: true,
-    refresh: true,
+    refresh: false,
     search: false,
     fullscreen: true,
     notification: true,

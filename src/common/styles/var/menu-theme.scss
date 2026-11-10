@@ -91,7 +91,7 @@
     // 顶部左侧面包屑
     --#{$teek-namespace}-layout-header-breadcrumb-link-color: color-mix(
       in srgb,
-      var(--tk-surface-text-color) 46%,
+      var(--tk-surface-gray-color) 46%,
       var(--tk-surface-bg-color-box)
     );
     --#{$teek-namespace}-layout-header-breadcrumb-text-color: color-mix(

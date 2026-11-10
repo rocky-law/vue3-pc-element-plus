@@ -38,12 +38,9 @@
  * @param meta.query ==> 查询参数，Teek 不做任何处理，自行取出处理
  */
 
-import { Discount, Document, Compass } from "@element-plus/icons-vue";
+import { Discount, Document, Compass, Grid, House, DataLine, User } from "@element-plus/icons-vue";
 import { HOME_URL, HOME_NAME } from "@/common/config";
 
-import excelRoutes from "./dynamic/excel";
-import tableRoutes from "./dynamic/table";
-import proComponentsRoutes from "./dynamic/pro-component";
 import chartsRoutes from "./dynamic/charts";
 
 /**
@@ -73,42 +70,71 @@ export const dynamicRoutes: RouterConfigRaw[] = [
   {
     path: HOME_URL,
     name: HOME_NAME,
-    component: "/pro/pro-page/simple/index",
+    component: "/chainData/index",
     meta: {
-      title: "表格展示",
-      icon: Compass,
+      title: "首页",
+      icon: House,
       isAffix: true,
       tagText: "Welcome",
       hideInMenu: false,
       tagProps: { type: "success" },
     },
   },
-  { ...chartsRoutes },
-  { ...proComponentsRoutes },
-  // { ...tableRoutes },
-  // { ...excelRoutes },
   {
-    path: "/tabs",
-    name: "Tabs",
-    component: "/pro/pro-page/complex/index",
+    path: "/block",
+    name: "Block",
+    component: "/chainData/block",
+    meta: {
+      title: "block",
+      icon: Compass,
+      isAffix: true,
+      hideInMenu: true,
+      tagText: "Welcome",
+      tagProps: { type: "success" },
+    },
+  },
+  { ...chartsRoutes },
+  {
+    path: "/tableQuery",
+    name: "结构查询",
+    component: "/chainData/tableQuery",
     meta: {
       title: "复杂表格",
-      icon: Discount,
+      icon: Grid,
     },
   },
   {
-    path: "/my-chart",
-    name: "codemirror",
-    component: "/codemirror/viewer",
+    path: "/tabs",
+    name: "链式查询",
+    component: "/echarts/chart04",
     meta: {
-      title: "",
+      title: "链式查询",
+      icon: DataLine,
+    },
+  },
+  {
+    path: "/wallet360",
+    name: "钱包360",
+    component: "/wallet360/index",
+    meta: {
+      title: "钱包360",
+      icon: User,
+    },
+  },
+  {
+    path: "/token360",
+    name: "Token360",
+    component: "/token360/index",
+    meta: {
+      title: "Token360",
       icon: Discount,
     },
   },
   {
     path: "https://baidu.com",
-    name: "open新页签",
+    name: "Token360",
     meta: {
+      hideInMenu: true,
       title: "菜单open页面",
       icon: Document,
     },

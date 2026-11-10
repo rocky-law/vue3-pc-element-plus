@@ -1,4 +1,4 @@
-import { Tickets, Star } from "@element-plus/icons-vue";
+import { ChatLineSquare, Star, UserFilled } from "@element-plus/icons-vue";
 
 export default {
   path: "/page-charts",
@@ -6,32 +6,20 @@ export default {
   name: "echarts",
   meta: {
     title: "echarts",
-    icon: Tickets,
+    icon: UserFilled,
   },
   children: [
     {
       path: "page-chart01",
-      component: () => import("@/views/echarts/chart01.vue"),
-      name: "chart01",
+      component: () => import("@/views/member/index.vue"),
+      name: "会员",
       meta: { title: "chart01", icon: Star },
     },
     {
       path: "page-chart02",
-      component: () => import("@/views/echarts/chart02.vue"),
-      name: "chart02",
-      meta: { title: "chart02", icon: Star },
-    },
-    {
-      path: "page-chart03",
-      component: () => import("@/views/echarts/chart03.vue"),
-      name: "chart03",
-      meta: { title: "chart03", icon: Star },
-    },
-    {
-      path: "page-chart04",
-      component: () => import("@/views/echarts/chart04.vue"),
-      name: "chart04",
-      meta: { title: "chart04", icon: Star },
+      component: () => import("@/views/member/depositRecords.vue"),
+      name: "充值记录",
+      meta: { title: "chart02", icon: ChatLineSquare },
     },
   ],
 } as RouterConfigRaw;

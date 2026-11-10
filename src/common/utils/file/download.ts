@@ -123,7 +123,7 @@ function base64ToBlob(base64: string) {
   const o = window.atob(n[1]);
   let length = o.length;
   const uint8Array = new Uint8Array(length);
-  for (; length--; ) uint8Array[length] = o.charCodeAt(length);
+  for (; length--;) uint8Array[length] = o.charCodeAt(length);
   return new Blob([uint8Array], { type });
 }
 

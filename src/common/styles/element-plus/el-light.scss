@@ -106,3 +106,6 @@ $component-size: (
   --#{$el-namespace}-color-error: var(--#{$teek-namespace}-color-error) !important;
   --#{$el-namespace}-color-info: var(--#{$teek-namespace}-color-info) !important;
 }
+.el-input-number {
+  width: 100%;
+}

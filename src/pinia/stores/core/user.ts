@@ -78,7 +78,7 @@ export const useUserStore = defineStore(
             signature: "这个人很懒，什么都没有写",
             email: "1234567890@qq.com",
             phone: "1234567890",
-            avatar: "/avatar1.png",
+            avatar: "/avatar.png",
             roles: ["admin"],
             job: "开发工程师",
             dept: "云科技技术部 - 智能全栈科",

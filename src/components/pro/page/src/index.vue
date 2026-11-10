@@ -32,7 +32,6 @@ const props = withDefaults(defineProps<ProPageProps>(), {
   searchProps: () => ({}),
   initShowSearch: true,
   defaultValues: () => ({}),
-
   // ProTable 组件的 Props
   card: true,
   requestImmediate: true,

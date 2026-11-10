@@ -80,7 +80,7 @@
 
   // 添加响应式圆角，最小为 2px，最大为 12px
   border-radius: clamp(2px, calc(var(--#{$teek-namespace}-radius) * 0.5 + 2px), 12px) !important;
-  transition: all var(--#{$teek-namespace}-card-transition-duration) ease !important;
+  transition: all var(--#{$teek-namespace}-card-transition-duration) ease;
 
   // 悬停效果整合
   &.hover {

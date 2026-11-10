@@ -6,6 +6,7 @@ const proComponents: RouterConfigRaw = {
   meta: {
     title: "超级组件",
     icon: Film,
+    hideInMenu: false,
     tagText: "Hot",
     tagProps: { type: "danger" },
   },

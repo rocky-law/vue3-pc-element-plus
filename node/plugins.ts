@@ -7,6 +7,7 @@ import eslintPlugin from "vite-plugin-eslint";
 import progress from "vite-plugin-progress";
 import ServerUrlCopy from "vite-plugin-url-copy";
 import vueDevTools from "vite-plugin-vue-devtools";
+import tailwindcss from "@tailwindcss/vite";
 import { visualizer } from "rollup-plugin-visualizer";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -18,6 +19,7 @@ export function getPluginsList(command: string, viteEnv: ImportMetaEnv) {
   return [
     vue(),
     vueJsx(),
+    tailwindcss(),
     // viteEnv.VITE_DEVTOOLS && vueDevTools(),
     eslintPlugin({ cache: false }), // EsLint 报错信息显示在浏览器界面上
     ServerUrlCopy({

@@ -1,0 +1,75 @@
+/* Tailwind CSS */
+
+@import "tailwindcss";
+@layer base {
+}
+
+@theme static {
+  /* 颜色 */
+  --color-primary: #71b543;
+  --color-primary2: #ffffff;
+  --color-secondary: #b5f90e;
+  --color-secondary2: #ff4848;
+  --color-text-01: #0784c3;
+  --color-bg-card: #ffffff;
+  --color-card-border: #e5e5e5;
+}
+
+@layer components {
+  .apply-main {
+    @apply w-full h-[calc(100%-52px)] px-4 py-4 overflow-y-auto pt-2 pb-[300px];
+  }
+  .apply-flex-center-between {
+    @apply flex items-center justify-between;
+  }
+  .apply-flex-stretch-between {
+    @apply flex items-stretch justify-between;
+  }
+  .apply-flex-start-between {
+    @apply flex items-start justify-between;
+  }
+  .apply-flex-center {
+    @apply flex items-center gap-2;
+  }
+  .apply-flex-center-center {
+    @apply flex items-center gap-2 justify-center;
+  }
+  .apply-flex-start {
+    @apply flex items-start gap-2;
+  }
+  .apply-flex-center-gap-1 {
+    @apply text-primary flex items-center gap-1 bg-bg-card text-xs rounded-lg;
+  }
+  .apply-flex-col {
+    @apply flex flex-col;
+  }
+  .apply-flex-col-center {
+    @apply flex flex-col items-center;
+  }
+  .apply-flex-col-end {
+    @apply flex flex-col items-end;
+  }
+  .apply-flex-col-center-between {
+    @apply flex flex-col items-center justify-between;
+  }
+
+  .apply-flex-col-between {
+    @apply flex flex-col  justify-between;
+  }
+  .apply-button-row {
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0px;
+    align-items: center;
+    --el-fill-color-light: #ddd;
+    --el-fill-color: #ddd;
+    --el-fill-color-dark: #ccc;
+    button {
+      min-width: 80px;
+    }
+  }
+}
+
+@layer utilities {
+}

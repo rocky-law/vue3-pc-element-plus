@@ -6,6 +6,7 @@ import { serviceConfig } from "@/common/config";
 import { useCommon, useNamespace } from "@/composables";
 import Fullscreen from "./components/fullscreen/index.vue";
 import LanguageSelect from "./components/language-select/index.vue";
+import Notification from "./components/notification/index.vue";
 import UserAvatar from "./components/user-avatar/index.vue";
 import ErrorLog from "./components/error-log/index.vue";
 import GlobalSearch from "./components/global-search/index.vue";
@@ -40,6 +41,7 @@ const { isMobile } = useCommon();
     <div :class="ns.e('btn')" :style="{ '--icon-size': ns.cssVar('layout-header-icon-size') }" class="flx-align-center">
       <GlobalSearchInput v-if="!isMobile && widget.search" id="menuSearch" />
       <Fullscreen v-if="!isMobile && widget.fullscreen" id="fullscreen" />
+      <Notification v-if="widget.notification" id="notification" />
       <LanguageSelect v-if="widget.language" id="languageSelect" />
       <ErrorLog
         v-if="serviceConfig.layout.errorLog.showInHeader && errorCount > 0 && !isMobile"

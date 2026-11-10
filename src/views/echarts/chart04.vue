@@ -1,5 +1,23 @@
 <template>
   <div>
+    <el-input
+      size="large"
+      v-model="input2"
+      style="width: 500px; margin-bottom: 20px"
+      placeholder="Please input"
+      :prefix-icon="Search"
+    >
+      <template #prepend>
+        <el-select size="large" v-model="select" placeholder="Select" style="width: 150px">
+          <el-option label="查询钱包地址" value="1" />
+          <el-option label="查询Token来源" value="2" />
+          <el-option label="查询Token去向" value="3" />
+        </el-select>
+      </template>
+      <template #append>
+        <el-button :icon="Search" />
+      </template>
+    </el-input>
     <div ref="chartContainer" class="chart-container"></div>
     <button @click="zoomBy(1.2)">放大</button>
     <button @click="zoomBy(1 / 1.2)">缩小</button>
@@ -9,6 +27,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
+import { Search } from "@element-plus/icons-vue";
 import { Rect as GRect, Text as GText } from "@antv/g";
 import {
   Badge,
@@ -26,7 +45,8 @@ import {
 const style = document.createElement("style");
 style.innerHTML = `@import url('${iconfont.css}');`;
 document.head.appendChild(style);
-
+const input2 = ref("");
+const select = ref("1");
 const COLORS = {
   B: "#1783FF",
   R: "#F46649",
@@ -213,6 +233,108 @@ class TreeNode extends Rect {
       stroke: GREY_COLOR,
     };
   }
+  // 标签1：右上角，背景色跟随状态
+  getTag1Style(attributes) {
+    const [width, height] = this.getSize(attributes);
+    return {
+      x: -width / 2 + 25 + 8,
+      y: -4,
+      text: this.data.tag1, // 文字内容，可从数据取
+      fontSize: 10,
+      fill: "#fff", // 文字颜色
+      textAlign: "center",
+      textBaseline: "middle",
+      backgroundFill: COLORS[this.data.status] || COLORS.B, // 矩形背景色
+      backgroundHeight: 18, // 背景高度
+      backgroundWidth: 50, // 背景宽度
+      backgroundRadius: 2, // 圆角
+      backgroundLineWidth: 0,
+    };
+  }
+
+  drawTag1Shape(attributes, container) {
+    this.upsert("tag1", Label, this.getTag1Style(attributes), container);
+  }
+
+  // 标签2：右上角，灰色背景
+  getTag2Style(attributes) {
+    const [width, height] = this.getSize(attributes);
+    return {
+      x: -width / 2 + 25 + 8 + 50 + 8, // 标签1的宽度 + 间距
+      y: -4,
+      text: this.data.tag2,
+      fontSize: 10,
+      fill: "#f0f",
+      textAlign: "center",
+      textBaseline: "middle",
+      backgroundFill: GREY_COLOR, // 矩形背景色
+      backgroundHeight: 18,
+      backgroundWidth: 50,
+      backgroundRadius: 2,
+      backgroundLineWidth: 0,
+    };
+  }
+
+  drawTag2Shape(attributes, container) {
+    this.upsert("tag2", Label, this.getTag2Style(attributes), container);
+  }
+
+  getCopyIconStyle(attributes) {
+    const [width, height] = this.getSize(attributes);
+    return {
+      x: width / 2 - 14,
+      y: -height / 2 + 16,
+      fontFamily: "iconfont",
+      fontSize: 16,
+      text: "\ue68e",
+      fill: GREY_COLOR, // 图标颜色
+      cursor: "pointer",
+      textAlign: "center",
+      textBaseline: "middle",
+      // 如果你想加个圆形/矩形背景，可以用 Label 的背景属性：
+      // backgroundFill: '#f0f0f0',
+      // backgroundRadius: 4,
+      // backgroundWidth: 20,
+      // backgroundHeight: 20,
+    };
+  }
+
+  drawCopyIconShape(attributes, container) {
+    const copyStyle = this.getCopyIconStyle(attributes);
+    // 用 Label 或 GText 都可以，这里用 Label 方便加背景
+    const icon = this.upsert("copy-icon", Label, copyStyle, container);
+
+    if (icon && !Reflect.has(icon, "__copy_bind__")) {
+      Reflect.set(icon, "__copy_bind__", true);
+
+      icon.addEventListener(CommonEvent.CLICK, e => {
+        e.stopPropagation(); // 阻止事件冒泡，避免触发画布其他行为
+
+        // 拼接要复制的文本内容（你可以按需修改）
+        const textToCopy = `${this.data.name || ""}`;
+
+        // 调用 Clipboard API 复制
+        navigator.clipboard
+          .writeText(textToCopy)
+          .then(() => {
+            console.log("已复制:", textToCopy);
+
+            // 简单的视觉反馈：图标变蓝，1秒后恢复
+            icon.update({ fill: COLORS.B });
+            setTimeout(() => {
+              icon.update({ fill: GREY_COLOR });
+            }, 1000);
+
+            // 如果你想弹出个提示，也可以用 graph.emit 抛事件让外层处理
+            // this.context.graph.emit('node-copied', { id: this.id, text: textToCopy });
+          })
+          .catch(err => {
+            console.error("复制失败:", err);
+            alert("复制失败，请手动复制");
+          });
+      });
+    }
+  }
 
   render(attributes = this.parsedAttributes, container) {
     super.render(attributes, container);
@@ -224,6 +346,13 @@ class TreeNode extends Rect {
     this.drawVariableShape(attributes, container);
     this.drawProcessBarShape(attributes, container);
     this.drawCollapseShape(attributes, container);
+
+    // 👇 新增：绘制两个标签
+    this.drawTag1Shape(attributes, container);
+    this.drawTag2Shape(attributes, container);
+
+    // 👇 新增：绘制复制图标
+    this.drawCopyIconShape(attributes, container);
   }
 }
 
@@ -258,6 +387,8 @@ onMounted(() => {
             if (!datum.style) datum.style = {};
             // 设置默认折叠的层级
             datum.style.collapsed = depth >= 4;
+            datum.tag1 = datum.name?.slice(0, 5) || "标签1";
+            datum.tag2 = "标签2";
             if (!datum.children) return datum;
             const { children, ...restDatum } = datum;
             return { ...restDatum, children: children.map(child => child.id) };
@@ -266,7 +397,7 @@ onMounted(() => {
         node: {
           type: "tree-node",
           style: {
-            size: [202, 60],
+            size: [202, 75],
             ports: [{ placement: "left" }, { placement: "right" }],
             radius: 4,
           },

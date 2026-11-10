@@ -8,6 +8,7 @@ import { Icon, Auth, Role } from "@/components";
 import App from "./App.vue";
 import "virtual:svg-icons-register";
 
+import "@styles/tailwind.css";
 import "@styles/normalize.css";
 import "@styles/reset.css";
 import "@styles/var/index.scss"; // 主题变量

@@ -378,6 +378,7 @@ const tableHeadInstance = useTemplateRef<ProTableHeadInstance>("tableHeadInstanc
 const tableMainInstance = useTemplateRef<ProTableMainInstance>("tableMainInstance");
 
 const handleFullscreen = () => {
+  console.log("handleFullscreen");
   isFullscreen.value = !isFullscreen.value;
   emits("fullscreen");
 };

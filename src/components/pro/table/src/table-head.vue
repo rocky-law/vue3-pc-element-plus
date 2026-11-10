@@ -279,11 +279,12 @@ defineExpose(expose);
 </script>
 
 <template>
+  <div :class="ns.e('left')" v-if="title" style="padding-bottom: 8px">
+    {{ title }}
+  </div>
   <div :class="ns.b()">
     <div :class="ns.e('left')">
-      <slot name="head-left" v-bind="{ selectedListIds, selectedList, isSelected }">
-        {{ title }}
-      </slot>
+      <slot name="head-left" v-bind="{ selectedListIds, selectedList, isSelected }"></slot>
     </div>
 
     <div :class="ns.e('right')">

@@ -331,7 +331,6 @@ defineExpose(expose);
 <template>
   <el-table
     ref="elTableInstance"
-    show-overflow-tooltip
     v-bind="headerResize ? { ...$attrs, border: true } : $attrs"
     :class="[ns.b(), { [ns.join('header--resize')]: !$attrs.border && headerResize }]"
     :data="tableData"
@@ -369,6 +368,7 @@ defineExpose(expose);
           :align="column.align || 'center'"
           :editable
           :options-map
+          :show-overflow-tooltip="column.showOverflowTooltip"
           @register-pro-form-instance="registerProFormInstance"
           @form-change="handleFormChange"
           @filter="handleFilter"
